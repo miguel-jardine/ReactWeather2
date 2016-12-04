@@ -1,31 +1,43 @@
 var 
     React       = require("react"),
-    {Link}      = require("react-router"),
+    {Link, IndexLink}      = require("react-router"),
 
     end_var_def = [];
 
-// var Nav = React.createClass({
-//     render: function () {
-//         return(
-//             <div>
-//                 <Link to="/">Get Weather</Link>
-//                 <Link to="/about">About</Link>
-//                 <Link to="/examples">Examples</Link>
+var Nav = React.createClass({
+    onFormSubmit: function (e) {
+        e.preventDefault();
+        alert("Not wired up yet");
+    },
 
-//             <h2>Nav Component</h2>
-//             </div>
-//         )
-//     }
-// });
+    render: function () {
+        return(
+            <div className="top-bar">
+                <div className="top-bar-left">
+                    <ul className="menu">
+                        <li className="menu-text">React Weather App</li>
+                        <li>
+                            <IndexLink to="/" activeClassName="active" activeStyle={{fontWeight: "bold"}} >Get Weather</IndexLink>
+                        </li>
+                        <li>
+                            <Link to="/about" activeClassName="active" activeStyle={{fontWeight: "bold"}} >About</Link>
+                        </li>
+                        <li>
+                            <Link to="/examples" activeClassName="active" activeStyle={{fontWeight: "bold"}} >Examples</Link>
+                        </li>
+                    </ul>
+                </div>
+                <div className="top-bar-right">
+                    <form onSubmit={this.onFormSubmit}>
+                        <ul className="menu">
+                            <li><input type="search" placeholder="Enter city name" /></li>
+                            <li><input type="submit" className="button" value="Get Weather" /></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        )
+    }
+});
 
-var Nav = () => {
-    return(
-        <div>
-            <h2>Nav Component</h2>
-            <Link to="/">Get Weather</Link>
-            <Link to="/about">About</Link>
-            <Link to="/examples">Examples</Link>
-        </div>
-    )
-}
 module.exports = Nav;
