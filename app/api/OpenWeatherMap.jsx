@@ -14,10 +14,12 @@ module.exports = {
 
         return axios.get(requestUrl)
             .then(this.getSuccess, this.getFailure);
+            // .then(this.getFailure, this.getSuccess);
     }, 
 
 
     getSuccess: function (res) {
+        // debugger;
         if (res.data.cod && res.data.message) {
             throw new Error(res.data.message);
         } else {

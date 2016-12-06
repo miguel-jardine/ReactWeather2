@@ -15,7 +15,36 @@ var React = require("react");
 
 var About = () => {
     return(
-        <h2>About Component</h2>
+        <div>
+            <h1>About Component</h1>
+            <p>Technologies I'm learning to make my application:</p>
+            <ol>
+                <li> 
+                    <a href="">React</a>
+                </li>
+                <li>
+                    <a href="">React Native</a>
+                </li>
+                <li>
+                    <a href="">Github</a>
+                </li>
+                <li>
+                    <a href="">Bootstrap</a> vs. <a href="">Foundation</a>
+                </li>
+                <li>
+                    <a href="">JavaScript</a>
+                </li>
+                <li>
+                    <a href="">Node.js</a>
+                </li>
+                <li>
+                    <a href="">MongoDB</a>
+                </li>
+            </ol>
+
+        </div>
+        
+
     )
 }
 
