@@ -16,7 +16,7 @@ var React = require("react");
 var About = () => {
     return(
         <div>
-            <h1>About Component</h1>
+            <h1 className="page-title">About Component</h1>
             <p>Technologies I'm learning to make my application:</p>
             <ol>
                 <li> 
