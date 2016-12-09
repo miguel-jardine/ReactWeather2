@@ -9,6 +9,7 @@ var
     end_var_def = [];
 
 var Weather = React.createClass({
+
     getInitialState: function () {
         return {
             isLoading: false
@@ -16,18 +17,39 @@ var Weather = React.createClass({
     },
 
 
-    handleSearch: function (location) {
-        // var that = this;
+    componentDidMount: function () {
+        var city = this.props.location.query.location;
+
+        if (city && city.length > 0) {
+            this.handleSearch(city);
+            window.location.hash = "#/";
+        }
+    },
+
+
+    componentWillReceiveProps: function (newProps) {
+        var city = newProps.location.query.location;
+
+        if (city && city.length > 0) {
+            this.handleSearch(city);
+            window.location.hash = "#/";
+        }
+    },
+
+
+    handleSearch: function (city) {
         this.setState({ 
             isLoading: true,
-            errorMessage: undefined
+            errorMessage: undefined,
+            city: undefined,
+            temp: undefined,
         });
-        
-        OpenWeatherMap.getTemp(location)
+
+        OpenWeatherMap.getTemp(city)
             .then(results => {
-                let retrievedLocation = `${results.city}, ${results.country} (${location})`;
+                let retrievedCity = `${results.city}, ${results.country} (${city})`;
                 this.setState({
-                    location: retrievedLocation,
+                    city: retrievedCity,
                     temp: results.temp, 
                     isLoading: false
                 });
@@ -43,13 +65,13 @@ var Weather = React.createClass({
 
     render: function () {
         // render: () => {
-        var {isLoading, location, temp, errorMessage} = this.state;
+        var {isLoading, city, temp, errorMessage} = this.state;
 
         function renderMessage () {
             if (isLoading) {
                 return <h3 className="text-center">Fetching weather...</h3>;
-            } else if (location && temp) {
-                return <WeatherMessage location={location} temp={temp} />;
+            } else if (city && temp) {
+                return <WeatherMessage city={city} temp={temp} />;
             }
         }
 

@@ -1,6 +1,7 @@
 var 
-    React       = require("react"),
-    {Link}      = require("react-router"),
+    React           = require("react"),
+    ReactDOM        = require("react-dom"),
+    ReactDOMServer  = require("react-dom/server"),
 
     end_var_def = [];
 
@@ -20,15 +21,9 @@ var ErrorModal = React.createClass({
 
 
     componentDidMount: function () {
-        var modal = new Foundation.Reveal($("#error-modal"));
-        modal.open();
-    },
-
-
-    render: function () {
         var {title, message} = this.props;
 
-        return(
+        var dialog = (
             <div className="reveal tiny text-center" id="error-modal" data-reveal="">
                 <h4>{title}</h4>
                 <p>{message}</p>
@@ -39,6 +34,17 @@ var ErrorModal = React.createClass({
                 </p>
             </div>
         )
+
+        var $modal = $(ReactDOMServer.renderToString(dialog));
+        $(ReactDOM.findDOMNode(this)).html($modal);
+        
+        var modal = new Foundation.Reveal($("#error-modal"));
+        modal.open();
+    },
+
+
+    render: function () {
+        return <div></div>;
     }
 });
 

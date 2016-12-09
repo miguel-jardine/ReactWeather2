@@ -8,12 +8,14 @@ const
 
 
 module.exports = {
+    
     getTemp: function (location) {
         var encodedLocation = encodeURIComponent(location);
         var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
 
         return axios.get(requestUrl)
-            .then(this.getSuccess, this.getFailure);
+            .then(this.getSuccess, this.getFailure)
+            .catch(console.err);
             // .then(this.getFailure, this.getSuccess);
     }, 
 
@@ -35,5 +37,4 @@ module.exports = {
     getFailure: function (res) {
         throw new Error("API cannot retrieve weather information for requested city.");
     }
-
 }
